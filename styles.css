@@ -1,0 +1,82 @@
+.oym-ribbon-class {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.oym-ribbon-class:hover {
+    color: var(--text-normal);
+}
+
+/* Modal styling */
+.oym-modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.oym-modal-content button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.oym-modal-content button:hover {
+    background-color: var(--interactive-accent-hover);
+}
+
+/* Settings tab styling */
+.oym-settings .setting-item {
+    border-bottom: 1px solid var(--background-modifier-border);
+    padding: 18px 0;
+}
+
+.oym-settings .setting-item:last-child {
+    border-bottom: none;
+}
+
+.oym-settings .setting-item-info {
+    margin-bottom: 8px;
+}
+
+.oym-settings .setting-item-name {
+    font-weight: 500;
+    color: var(--text-normal);
+}
+
+.oym-settings .setting-item-description {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+/* Version section styling */
+.oym-version-warpper {
+    padding-top: 20px;
+    border-top: 1px solid var(--background-modifier-border);
+    text-align: center;
+}
+
+.oym-version-content {
+    padding: 20px 0;
+}
+
+.oym-version-name {
+    font-weight: 500;
+    color: var(--text-normal);
+    margin: 0 0 8px 0;
+}
+
+.oym-version-author {
+    color: var(--text-muted);
+    margin: 0 0 8px 0;
+}
+
+.oym-version-number {
+    color: var(--text-muted);
+    font-size: 0.85em;
+    opacity: 0.8;
+}

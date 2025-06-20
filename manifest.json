@@ -1,0 +1,13 @@
+{
+	"id": "open-your-mind",
+	"name": "Open Your Mind",
+	"version": "1.0.0",
+	"minAppVersion": "1.8.7",
+	"description": "This is an awesome tool that enhances your Obsidian experience with powerful features.",
+	"author": "eharris128",
+	"authorUrl": "https://github.com/eharris128",
+	"fundingUrl": {
+		"GitHub Sponsor": "https://github.com/sponsors/eharris128"
+	},
+	"isDesktopOnly": false
+}
