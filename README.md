@@ -21,28 +21,28 @@ Content OS is an Obsidian plugin that bridges the gap between your note-taking a
 
 ### 2. LinkedIn Authentication
 1. Open plugin settings
-2. Click "Generate LinkedIn OAuth Token"
-3. Complete the OAuth flow in your browser
+2. Click "Generate LinkedIn access token"
+3. Complete the login flow in your browser
 4. Copy and paste the access token into the plugin settings
-5. Click "Validate Token" to verify the token works
+5. Click "Validate token" to verify the token works
 
 ### 3. Create Your First Post
-- Use the ribbon icon (LinkedIn logo) to open the post composer
+- Use the ribbon icon (send icon) to open the post composer
 - Or use the command palette: "Create LinkedIn post"
 - Write your content in the modal
-- Click "Post to LinkedIn" to publish
+- Click "Post" to publish
 
 ## Usage
 
 ### Creating Posts
-1. **Ribbon Icon**: Click the LinkedIn icon in the left ribbon
+1. **Ribbon Icon**: Click the send icon in the left ribbon
 2. **Command Palette**: Search for "Create LinkedIn post"
 3. **Write Content**: Enter your post content in the modal
 4. **Character Limit**: Stay within LinkedIn's 3000 character limit
-5. **Publish**: Click "Post to LinkedIn" to publish immediately
+5. **Publish**: Click "Post" to publish immediately
 
 ### Settings Configuration
-- **LinkedIn Access Token**: Your OAuth token for API access
+- **LinkedIn Access Token**: Your OAuth token for API access (password field for security)
 - **Dev Mode**: Enable for detailed logging and debugging
 - **Log Level**: Control the verbosity of logs when dev mode is enabled
 
@@ -98,6 +98,9 @@ Content OS integrates with LinkedIn's v2 API:
 - **OAuth Security**: Uses industry-standard OAuth 2.0 authentication
 - **Token Validation**: Tokens are validated before each use
 
+### OAuth Host
+- I have a small open source repo [here](https://github.com/eharris128/content-os-linkedin-oauth-proxy) where the LinkedIn OAuth flow is driven from. When a user uses the `Generate LinkedIn access token` button within this app, this is the code standing behind the URL where they are pushed.
+
 ## Troubleshooting
 
 ### Common Issues
@@ -124,15 +127,6 @@ Enable dev mode in plugin settings to see detailed logs in the developer console
 3. Set log level to "Debug"
 4. Check browser developer console for detailed information
 
-## Contributing
-
-Content OS is built with TypeScript and follows modern development practices:
-
-- **Code Quality**: ESLint configuration with strict rules
-- **Type Safety**: Full TypeScript coverage
-- **Modern Build**: ESBuild for fast compilation
-- **Testing**: Unit test support with Vitest
-
 ## License
 
 MIT License - See LICENSE file for details.
@@ -141,8 +135,3 @@ MIT License - See LICENSE file for details.
 
 For issues, feature requests, or questions:
 - GitHub Issues: [Report bugs or request features]
-- Community: Share feedback with the Obsidian community
-
----
-
-**Transform your note-taking into content publishing with Content OS!**
