@@ -1,218 +1,148 @@
-# Obsidian Plugin QuickStar
+# Content OS
 
-This is an enhanced Obsidian plugin quickstart template that includes modern development practices, comprehensive examples, and all the files needed for plugin submission.
+Post directly to LinkedIn from your vault.
+
+## Overview
+
+Content OS is an Obsidian plugin that bridges the gap between your note-taking and content publishing workflows. Create and publish LinkedIn posts directly from Obsidian without switching between applications.
 
 ## Features
 
-- **Enhanced Plugin Structure**: Modern TypeScript setup with strict type checking
-- **Rich Examples**: Demonstrates commands, modals, settings, and error handling
-- **GitHub Actions**: Automated release workflow with Node.js 24.2.0
-- **Comprehensive Settings**: Toggle controls, sliders, and persistent storage
-- **Modern Build System**: ESBuild with development and production modes
-- **Code Quality**: ESLint configuration and type checking
-- **Submission Ready**: Follows Obsidian plugin submission requirements
+- **Seamless Workflow**: Create LinkedIn posts without leaving Obsidian
+- **User-Friendly Interface**: Simple modal for composing and publishing posts
+- **Character Counter**: Real-time character count with LinkedIn limits
 
 ## Quick Start
 
-1. Clone this repository
-2. Update the plugin information in `manifest.json`
-3. Install dependencies: `npm install`
-4. Start development: `npm run dev`
-5. Build for production: `npm run build`
+### 1. Installation
+1. Download the plugin files
+2. Place them in your Obsidian plugins directory: `.obsidian/plugins/content-os/`
+3. Enable the plugin in Obsidian settings
+
+### 2. LinkedIn Authentication
+1. Open plugin settings
+2. Click "Generate LinkedIn OAuth Token"
+3. Complete the OAuth flow in your browser
+4. Copy and paste the access token into the plugin settings
+5. Click "Validate Token" to verify the token works
+
+### 3. Create Your First Post
+- Use the ribbon icon (LinkedIn logo) to open the post composer
+- Or use the command palette: "Create LinkedIn post"
+- Write your content in the modal
+- Click "Post to LinkedIn" to publish
+
+## Usage
+
+### Creating Posts
+1. **Ribbon Icon**: Click the LinkedIn icon in the left ribbon
+2. **Command Palette**: Search for "Create LinkedIn post"
+3. **Write Content**: Enter your post content in the modal
+4. **Character Limit**: Stay within LinkedIn's 3000 character limit
+5. **Publish**: Click "Post to LinkedIn" to publish immediately
+
+### Settings Configuration
+- **LinkedIn Access Token**: Your OAuth token for API access
+- **Dev Mode**: Enable for detailed logging and debugging
+- **Log Level**: Control the verbosity of logs when dev mode is enabled
+
+## Authentication
+
+Content OS uses LinkedIn's OAuth 2.0 for secure authentication:
+
+1. **Initial Setup**: Generate a token through the OAuth proxy
+2. **Token Storage**: Tokens are stored securely in Obsidian's data storage
+3. **Auto-Validation**: The plugin automatically validates tokens before posting
+4. **User ID Caching**: LinkedIn user IDs are cached to avoid repeated API calls
 
 ## Development
 
-### Commands Available
+### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-- `npm run dev` - Start development with file watching
-- `npm run build` - Production build with minification
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues automatically
-- `npm test` - Run unit tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage report
-- `npm run version` - Bump version and update manifest
-- `npm run clean` - Remove build artifacts
-
-### Plugin Structure
-
-```
-├── main.ts              # Main plugin file with examples
-├── manifest.json        # Plugin metadata
-├── package.json         # Dependencies and scripts
-├── tsconfig.json        # TypeScript configuration
-├── vitest.config.ts     # Test configuration
-├── esbuild.config.mjs   # Build configuration
-├── .eslintrc.js         # Linting rules
-├── .gitignore           # Git ignore rules
-├── styles.css           # Plugin styles
-├── versions.json        # Version compatibility
-├── version-bump.mjs     # Version management utility
-├── src/
-│   └── utils/
-│       └── logger.ts    # Logger utility with dev mode
-├── tests/
-│   ├── setup/           # Test mocks and utilities
-│   ├── utils/           # Utility tests
-│   └── plugin/          # Plugin tests
-└── .github/
-    └── workflows/
-        ├── ci.yml       # Continuous integration
-        └── release.yml  # Automated release workflow
-```
-
-## Plugin Examples Included
-
-### Commands
-- Simple command with notice
-- Editor command for text formatting
-- Complex command with conditions
-- Timestamp insertion
-- Word count functionality
-
-### UI Components
-- Ribbon icon with click handler
-- Status bar integration
-- Modal with interactive elements
-- Settings tab with various controls
-
-### Settings
-- Text input with persistence
-- Toggle switches
-- Slider controls with plugintips
-- Automatic settings synchronization
-- Developer mode toggle for detailed logging
-
-## Testing
-
-This template includes a comprehensive testing setup using **Vitest** for fast, modern unit testing.
-
-### Running Tests
-
+### Setup
 ```bash
-# Run tests once
-npm test
-
-# Run tests in watch mode (automatically re-runs on file changes)
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
+npm install
+npm run dev      # Development with file watching
+npm run build    # Production build
+npm run lint     # Code linting
+npm run typecheck # TypeScript checking
 ```
 
-### Test Structure
-
-- **`tests/setup/`** - Mock implementations of Obsidian APIs and test utilities
-- **`tests/utils/`** - Tests for utility functions (like the logger)
-- **`tests/plugin/`** - Tests for plugin functionality (settings, lifecycle, etc.)
-
-### Writing Tests
-
-The test setup includes:
-- **Obsidian API mocks** - Test your plugin without requiring the full Obsidian environment
-- **Test utilities** - Helper functions for creating mock instances and capturing console output
-- **TypeScript support** - Full type checking in your tests
-
-Example test:
-```typescript
-import { describe, it, expect } from 'vitest';
-import { Logger } from '../../src/utils/logger';
-
-describe('Logger', () => {
-  it('should log messages in dev mode', () => {
-    const logger = new Logger('TestPlugin', true);
-    // Test your logger functionality
-  });
-});
+### Project Structure
+```
+├── main.ts                 # Main plugin entry point
+├── manifest.json           # Plugin metadata
+├── src/
+│   ├── linkedin/
+│   │   ├── api.ts          # LinkedIn API integration
+│   │   └── PostComposer.ts # Post creation modal
+│   └── utils/
+│       └── logger.ts       # Logging utility
+└── README.md              # This file
 ```
 
-### Continuous Integration
+## API Integration
 
-Tests automatically run on:
-- Every push to main/master branch
-- Every pull request
-- Multiple Node.js versions (20, 22)
+Content OS integrates with LinkedIn's v2 API:
 
-The CI also runs linting, type checking, and builds to ensure code quality.
+- **User Info Endpoint**: `/v2/userinfo` for user identification
+- **Posts Endpoint**: `/v2/posts` for content publishing
+- **OAuth Flow**: Standard OAuth 2.0 with PKCE for security
 
-## Release Process
+## Privacy & Security
 
-1. Update version in `package.json`
-2. Run `npm run version` to sync versions
-3. Commit changes: `git commit -am "Release v1.0.1"`
-4. Create tag: `git tag 1.0.1`
-5. Push with tags: `git push origin main --tags`
+- **Local Storage**: All tokens are stored locally in Obsidian
+- **No Data Collection**: Content OS doesn't collect or transmit user data
+- **OAuth Security**: Uses industry-standard OAuth 2.0 authentication
+- **Token Validation**: Tokens are validated before each use
 
-The GitHub Action will automatically:
-- Build the plugin
-- Create a draft release
-- Attach required files (`main.js`, `manifest.json`, `styles.css`)
+## Troubleshooting
 
-## Obsidian Plugin Submission Requirements
+### Common Issues
 
-This template follows the [official submission requirements](https://docs.obsidian.md/Plugins/Releasing/Submission+requirements+for+plugins):
+**Token Invalid/Expired**
+- Generate a new token through the OAuth flow
+- Ensure you're using the correct LinkedIn account
+- Check that the token hasn't expired
 
-### ✅ Required Files
-- `manifest.json` - Plugin metadata and configuration
-- `main.js` - Compiled plugin code (generated from main.ts)
-- `styles.css` - Plugin styles (optional but recommended)
+**Post Failed to Publish**
+- Verify your internet connection
+- Check that your LinkedIn account has posting permissions
+- Ensure content doesn't exceed character limits
 
-### ✅ Manifest Requirements
-- Unique plugin ID
-- Descriptive name and description
-- Proper version numbering
-- Minimum app version specified
-- Author information
-- Funding URLs (optional)
+**Plugin Not Loading**
+- Enable dev mode in settings for detailed logs
+- Check the developer console for error messages
+- Verify plugin files are in the correct directory
 
-### ✅ Code Quality
-- TypeScript with strict type checking
-- ESLint configuration
-- Error handling examples
-- Modern ES6+ syntax
-- Proper async/await usage
+### Debug Mode
+Enable dev mode in plugin settings to see detailed logs in the developer console:
+1. Open plugin settings
+2. Toggle "Dev mode" on
+3. Set log level to "Debug"
+4. Check browser developer console for detailed information
 
-### ✅ Build System
-- Automated build process
-- External dependencies properly handled
-- Source maps for development
-- Minification for production
+## Contributing
 
-### ✅ Documentation
-- Clear README with setup instructions
-- Code examples and API usage
-- Release process documentation
+Content OS is built with TypeScript and follows modern development practices:
 
-## Customization
-
-### Update Plugin Information
-1. Edit `manifest.json` - Change ID, name, description, author
-2. Edit `package.json` - Update name, description, repository URLs
-3. Update this README with your plugin's specific information
-
-### Add New Features
-1. Extend the main plugin class in `main.ts`
-2. Add new commands, modals, or settings
-3. Update settings interface if needed
-4. Add corresponding UI elements
-
-### Styling
-1. Add CSS rules to `styles.css`
-2. Use Obsidian's CSS variables for theming
-3. Follow Obsidian's design guidelines
-
-## Resources
-
-- [Obsidian Plugin API](https://docs.obsidian.md/Plugins/Getting+started/Plugin+anatomy)
-- [Plugin Submission Guidelines](https://docs.obsidian.md/Plugins/Releasing/Submission+requirements+for+plugins)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [ESBuild Documentation](https://esbuild.github.io/)
+- **Code Quality**: ESLint configuration with strict rules
+- **Type Safety**: Full TypeScript coverage
+- **Modern Build**: ESBuild for fast compilation
+- **Testing**: Unit test support with Vitest
 
 ## License
 
-MIT License - feel free to use this template for your own plugins!
+MIT License - See LICENSE file for details.
+
+## Support
+
+For issues, feature requests, or questions:
+- GitHub Issues: [Report bugs or request features]
+- Community: Share feedback with the Obsidian community
 
 ---
 
-Happy plugin development! 🚀
+**Transform your note-taking into content publishing with Content OS!**

@@ -40,7 +40,7 @@ export default [
       'object-shorthand': 'error',
       'comma-dangle': ['error', 'never'],
       'semi': ['error', 'always'],
-      'quotes': ['error', 'single', { 'avoidEscape': true }],
+      'quotes': ['error', 'double', { 'avoidEscape': true }],
       'indent': ['error', 2],
       'no-trailing-spaces': 'error',
       'eol-last': 'error',

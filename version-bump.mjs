@@ -13,4 +13,4 @@ let versions = JSON.parse(readFileSync("versions.json", "utf8"));
 versions[targetVersion] = minAppVersion;
 writeFileSync("versions.json", JSON.stringify(versions, null, "\t"));
 
-console.log(`✅ Version bumped to ${targetVersion}`);
+console.log(`Version bumped to ${targetVersion}`);

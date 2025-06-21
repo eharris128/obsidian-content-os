@@ -1,7 +1,7 @@
 {
-	"name": "open-your-mind",
+	"name": "content-os",
 	"version": "1.0.0",
-	"description": "This is an awesome tool that enhances your Obsidian experience with powerful features.",
+	"description": "Post directly to LinkedIn from your vault.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
@@ -20,8 +20,10 @@
 	"keywords": [
 		"obsidian",
 		"obsidian-plugin",
-		"productivity",
-		"note-taking"
+		"linkedin",
+		"social-media",
+		"content-publishing",
+		"productivity"
 	],
 	"author": "eharris128",
 	"license": "MIT",

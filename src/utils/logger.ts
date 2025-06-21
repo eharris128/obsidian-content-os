@@ -54,28 +54,28 @@ export class Logger {
 
   debug(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.DEBUG)) {
-      console.log(this.formatMessage('DEBUG', message), ...args); // eslint-disable-line no-console
+      console.log(this.formatMessage("DEBUG", message), ...args); // eslint-disable-line no-console
     }
   }
 
   info(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.INFO)) {
-      console.info(this.formatMessage('INFO', message), ...args);  // eslint-disable-line no-console
+      console.info(this.formatMessage("INFO", message), ...args);  // eslint-disable-line no-console
     }
   }
 
   warn(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.WARN)) {
-      console.warn(this.formatMessage('WARN', message), ...args);  // eslint-disable-line no-console
+      console.warn(this.formatMessage("WARN", message), ...args);  // eslint-disable-line no-console
     }
   }
 
   error(message: string, error?: unknown): void {
     if (this.shouldLog(LogLevel.ERROR)) {
       if (error) {
-        console.error(this.formatMessage('ERROR', message), error);  // eslint-disable-line no-console
+        console.error(this.formatMessage("ERROR", message), error);  // eslint-disable-line no-console
       } else {
-        console.error(this.formatMessage('ERROR', message));  // eslint-disable-line no-console
+        console.error(this.formatMessage("ERROR", message));  // eslint-disable-line no-console
       }
     }
   }
@@ -83,20 +83,20 @@ export class Logger {
   // Performance timing utilities
   time(foo: string): void {
     if (this.devMode) {
-      console.time(this.formatMessage('TIMER', `${foo} - start`));  // eslint-disable-line no-console
+      console.time(this.formatMessage("TIMER", `${foo} - start`));  // eslint-disable-line no-console
     }
   }
 
   timeEnd(label: string): void {
     if (this.devMode) {
-      console.timeEnd(this.formatMessage('TIMER', `${label} - start`)); // eslint-disable-line no-console
+      console.timeEnd(this.formatMessage("TIMER", `${label} - start`)); // eslint-disable-line no-console
     }
   }
 
   // Log grouping for organizing related logs
   group(title: string): void {
     if (this.devMode) {
-      console.group(this.formatMessage('GROUP', title)); // eslint-disable-line no-console
+      console.group(this.formatMessage("GROUP", title)); // eslint-disable-line no-console
     }
   }
 
@@ -118,11 +118,11 @@ export class Logger {
 
   // Lifecycle logging helpers
   logPluginLoad(): void {
-    this.info('Plugin loaded successfully');
+    this.info("Plugin loaded successfully");
   }
 
   logPluginUnload(): void {
-    this.info('Plugin unloaded');
+    this.info("Plugin unloaded");
   }
 
   logCommandExecution(commandId: string): void {

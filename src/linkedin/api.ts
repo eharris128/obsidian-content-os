@@ -1,12 +1,12 @@
-import { requestUrl, RequestUrlResponse } from 'obsidian';
+import { requestUrl, RequestUrlResponse } from "obsidian";
 
 export interface LinkedInPost {
 	author: string;
-	lifecycleState: 'PUBLISHED' | 'DRAFT';
-	visibility: 'PUBLIC' | 'CONNECTIONS' | 'LOGGED_IN';
+	lifecycleState: "PUBLISHED" | "DRAFT";
+	visibility: "PUBLIC" | "CONNECTIONS" | "LOGGED_IN";
 	commentary: string;
 	distribution: {
-		feedDistribution: 'MAIN_FEED' | 'NONE';
+		feedDistribution: "MAIN_FEED" | "NONE";
 		targetEntities: string[];
 		thirdPartyDistributionChannels: string[];
 	};
@@ -14,8 +14,8 @@ export interface LinkedInPost {
 
 export class LinkedInAPI {
   private accessToken: string;
-  private readonly API_VERSION = '202506';
-  private readonly BASE_URL = 'https://api.linkedin.com/v2';
+  private readonly API_VERSION = "202506";
+  private readonly BASE_URL = "https://api.linkedin.com/v2";
   private personUrn: string | null = null;
 
   constructor(accessToken: string) {
@@ -24,16 +24,16 @@ export class LinkedInAPI {
 
   async createPost(commentary: string): Promise<RequestUrlResponse> {
     if (!this.personUrn) {
-      throw new Error('Person URN not available. Please validate token first.');
+      throw new Error("Person URN not available. Please validate token first.");
     }
 
     const post: LinkedInPost = {
       author: `urn:li:person:${this.personUrn}`,
-      lifecycleState: 'PUBLISHED',
-      visibility: 'PUBLIC',
+      lifecycleState: "PUBLISHED",
+      visibility: "PUBLIC",
       commentary,
       distribution: {
-        feedDistribution: 'MAIN_FEED',
+        feedDistribution: "MAIN_FEED",
         targetEntities: [],
         thirdPartyDistributionChannels: []
       }
@@ -41,11 +41,11 @@ export class LinkedInAPI {
 
     const response = await requestUrl({
       url: `${this.BASE_URL}/posts`,
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`,
-        'LinkedIn-Version': this.API_VERSION,
-        'Content-Type': 'application/json'
+        "Authorization": `Bearer ${this.accessToken}`,
+        "LinkedIn-Version": this.API_VERSION,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(post)
     });
@@ -56,10 +56,10 @@ export class LinkedInAPI {
   async getUserInfo(): Promise<RequestUrlResponse> {
     const response = await requestUrl({
       url: `${this.BASE_URL}/userinfo`,
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`,
-        'LinkedIn-Version': this.API_VERSION
+        "Authorization": `Bearer ${this.accessToken}`,
+        "LinkedIn-Version": this.API_VERSION
       }
     });
 
@@ -87,12 +87,10 @@ export class LinkedInAPI {
   }
 
   getPersonUrn(): string | null {
-    console.log("personUrn", this.personUrn);
     return this.personUrn;
   }
 
   setPersonUrn(personUrn: string) {
     this.personUrn = personUrn;
-    console.log("set personUrn", this.personUrn);
   }
 }

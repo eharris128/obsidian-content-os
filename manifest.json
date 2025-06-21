@@ -1,9 +1,9 @@
 {
-	"id": "open-your-mind",
-	"name": "Open Your Mind",
+	"id": "content-os",
+	"name": "Content OS",
 	"version": "1.0.0",
 	"minAppVersion": "1.8.7",
-	"description": "This is an awesome tool that enhances your Obsidian experience with powerful features.",
+	"description": "Post directly to LinkedIn from your vault.",
 	"author": "eharris128",
 	"authorUrl": "https://github.com/eharris128",
 	"fundingUrl": {
