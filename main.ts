@@ -6,12 +6,13 @@ import {
   Setting
 } from "obsidian";
 import { Logger, LogLevel, createLogger } from "./src/utils/logger";
+import { LinkedInAPI } from "./src/linkedin/api";
+import { LinkedInPostComposer } from "./src/linkedin/PostComposer";
 
 interface ContentOSSettings {
   devMode: boolean;
   logLevel: LogLevel;
   linkedinAccessToken: string;
-  linkedinOAuthUrl: string;
   linkedinPersonUrn: string;
 }
 
@@ -19,7 +20,6 @@ const DEFAULT_SETTINGS: ContentOSSettings = {
   devMode: false,
   logLevel: LogLevel.ERROR,
   linkedinAccessToken: "",
-  linkedinOAuthUrl: "https://www.linkedin.com/oauth/v2/authorization",
   linkedinPersonUrn: ""
 };
 
@@ -106,7 +106,6 @@ export default class ContentOSPlugin extends Plugin {
       return;
     }
 
-    const { LinkedInAPI } = await import("./src/linkedin/api");
     const api = new LinkedInAPI(this.settings.linkedinAccessToken);
 
     if (this.settings.linkedinPersonUrn) {
@@ -126,10 +125,6 @@ export default class ContentOSPlugin extends Plugin {
       }
     }
 
-    // TODO - why do this in this fashion
-    const { LinkedInPostComposer } = await import(
-      "./src/linkedin/PostComposer"
-    );
     const composer = new LinkedInPostComposer(
       this.app,
       api,
@@ -154,30 +149,11 @@ class ContentOSSettingTab extends PluginSettingTab {
 
 
     new Setting(containerEl)
-      .setName("Dev mode")
-      .setDesc(
-        "Enable detailed logging for debugging. Only enable when troubleshooting issues."
-      )
-      .addToggle((toggle) =>
-        toggle
-          .setValue(this.plugin.settings.devMode)
-          .onChange(async (value) => {
-            this.plugin.settings.devMode = value;
-            await this.plugin.saveSettings();
-
-            const status = value ? "enabled" : "disabled";
-            new Notice(`Dev mode ${status}. Check console for detailed logs.`);
-
-            this.display();
-          })
-      );
-
-    new Setting(containerEl)
       .setName("Generate LinkedIn access token")
       .setDesc("Click the button to open your browser and start the login flow")
       .addButton((button) =>
         button.setButtonText("Generate LinkedIn access token").onClick(() => {
-          window.open("https://oauth-proxy.echarris.workers.dev", "_blank");
+          window.open("https://content-os.echarris.workers.dev/", "_blank");
           new Notice(
             "Complete the login flow and paste your access token below"
           );
@@ -206,7 +182,6 @@ class ContentOSSettingTab extends PluginSettingTab {
             return;
           }
 
-          const { LinkedInAPI } = await import("./src/linkedin/api");
           const api = new LinkedInAPI(this.plugin.settings.linkedinAccessToken);
 
           try {
@@ -227,6 +202,26 @@ class ContentOSSettingTab extends PluginSettingTab {
             new Notice(`Error validating token: ${errorMessage}`);
           }
         })
+      );
+
+    new Setting(containerEl)
+      .setName("Dev mode")
+      .setDesc(
+        "Enable detailed logging for debugging. Only enable when troubleshooting issues."
+      )
+      .addToggle((toggle) =>
+        toggle
+          .setValue(this.plugin.settings.devMode)
+          .onChange(async (value) => {
+            this.plugin.settings.devMode = value;
+            await this.plugin.saveSettings();
+
+            const status = value ? "enabled" : "disabled";
+            const message = status === "enabled" ? "Check console for detailed logs." : "";
+            new Notice(`Dev mode ${status}. ${message}`);
+
+            this.display();
+          })
       );
 
     // Only show log level setting when dev mode is enabled
