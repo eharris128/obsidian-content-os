@@ -40,12 +40,10 @@ export default class ContentOSPlugin extends Plugin {
     this.logger.logPluginLoad();
     this.logger.debug("Settings loaded", this.settings);
 
-    // This creates an icon in the left ribbon.
     const ribbonIconEl = this.addRibbonIcon(
-      "linkedin",
+      "send",
       "Create LinkedIn Post",
       (evt: MouseEvent) => {
-        // Called when the user clicks the icon.
         this.logger.debug("Ribbon icon clicked");
         this.createLinkedInPost();
       }
@@ -165,7 +163,7 @@ class ContentOSSettingTab extends PluginSettingTab {
       .setDesc(
         "Paste your access token here after completing the login flow"
       )
-      .addText((text) =>
+      .addText((text) => {
         text
           .setPlaceholder("Enter your access token")
           .setValue(this.plugin.settings.linkedinAccessToken)
@@ -173,8 +171,9 @@ class ContentOSSettingTab extends PluginSettingTab {
             this.plugin.settings.linkedinAccessToken = value;
             this.plugin.settings.linkedinPersonUrn = "";
             await this.plugin.saveSettings();
-          })
-      )
+          });
+        text.inputEl.type = "password";
+      })
       .addButton((button) =>
         button.setButtonText("Validate token").onClick(async () => {
           if (!this.plugin.settings.linkedinAccessToken) {
@@ -240,7 +239,6 @@ class ContentOSSettingTab extends PluginSettingTab {
               this.plugin.settings.logLevel = parseInt(value) as LogLevel;
               await this.plugin.saveSettings();
 
-              // Update logger's log level if it exists
               if (this.plugin.logger && "setLogLevel" in this.plugin.logger) {
                 this.plugin.logger.setLogLevel(this.plugin.settings.logLevel);
               }
