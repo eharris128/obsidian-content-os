@@ -15,6 +15,8 @@ export default [
       globals: {
         console: 'readonly',
         process: 'readonly',
+        window: 'readonly',
+        MouseEvent: 'readonly',
       },
     },
     plugins: {
