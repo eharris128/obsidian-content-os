@@ -61,7 +61,7 @@ export class LinkedInPostComposer extends Modal {
     });
 
     const postButton = buttonContainer.createEl("button", {
-      text: "Post to LinkedIn",
+      text: "Post",
       attr: {
         style: "flex: 1; background-color: var(--interactive-accent); color: var(--text-on-accent);"
       }
