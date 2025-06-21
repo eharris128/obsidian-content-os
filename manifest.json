@@ -6,8 +6,6 @@
 	"description": "Post directly to LinkedIn from your vault.",
 	"author": "eharris128",
 	"authorUrl": "https://github.com/eharris128",
-	"fundingUrl": {
-		"GitHub Sponsor": "https://github.com/sponsors/eharris128"
-	},
+	"fundingUrl": "https://github.com/sponsors/eharris128",
 	"isDesktopOnly": false
 }
