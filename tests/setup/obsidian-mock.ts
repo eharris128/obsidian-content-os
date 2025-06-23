@@ -10,13 +10,13 @@ export class MarkdownView {}
 export interface MarkdownFileInfo {}
 
 export default {
-	App,
-	Plugin,
-	PluginSettingTab,
-	Setting,
-	Modal,
-	Notice,
-	TFile,
-	Editor,
-	MarkdownView
+  App,
+  Plugin,
+  PluginSettingTab,
+  Setting,
+  Modal,
+  Notice,
+  TFile,
+  Editor,
+  MarkdownView
 };
