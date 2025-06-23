@@ -134,4 +134,7 @@ MIT License - See LICENSE file for details.
 ## Support
 
 For issues, feature requests, or questions:
-- GitHub Issues: [Report bugs or request features]
+- GitHub Issues: [Report an issue](https://github.com/eharris128/obsidian-content-os/issues)
+
+## Attribution
+- This plugin builds on top of the LinkedIn APIs, but is in no way affiliated or endorsed by LinkedIn.

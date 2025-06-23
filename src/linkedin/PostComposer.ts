@@ -6,6 +6,7 @@ export class LinkedInPostComposer extends Modal {
   private postContent: string = "";
   private api: LinkedInAPI;
   private logger: ReturnType<typeof createLogger>;
+  private postButton: HTMLButtonElement | null = null;
 
   constructor(app: App, api: LinkedInAPI, logger: ReturnType<typeof createLogger>) {
     super(app);
@@ -19,8 +20,7 @@ export class LinkedInPostComposer extends Modal {
     contentEl.createEl("h2", { text: "Create LinkedIn post" });
 
     // Post content textarea
-    const textareaContainer = contentEl.createDiv();
-    textareaContainer.style.marginBottom = "1rem";
+    const textareaContainer = contentEl.createDiv({ cls: "contentos-post-textarea-container" });
 
     const textarea = textareaContainer.createEl("textarea", {
       placeholder: "What do you want to share on LinkedIn?",
@@ -31,8 +31,7 @@ export class LinkedInPostComposer extends Modal {
 
     textarea.value = this.postContent;
     textarea.addEventListener("input", (e) => {
-      // TODO - rm any
-      this.postContent = (e.target as any).value;
+      this.postContent = textarea.value;
     });
 
     // Character count
@@ -65,8 +64,9 @@ export class LinkedInPostComposer extends Modal {
       attr: {
         style: "flex: 1; background-color: var(--interactive-accent); color: var(--text-on-accent);"
       }
-    });
+    }) as HTMLButtonElement;
 
+    this.postButton = postButton;
     postButton.addEventListener("click", async () => {
       await this.postToLinkedIn();
     });
@@ -88,10 +88,9 @@ export class LinkedInPostComposer extends Modal {
 
 
     // Disable post button and show loading state
-    const postButton = this.contentEl.querySelector("button:last-child") as any;
-    if (postButton) {
-      postButton.disabled = true;
-      postButton.textContent = "Posting...";
+    if (this.postButton) {
+      this.postButton.disabled = true;
+      this.postButton.textContent = "Posting...";
     }
 
     try {
@@ -112,9 +111,9 @@ export class LinkedInPostComposer extends Modal {
       new Notice(`Failed to post to LinkedIn: ${errorMessage}`);
 
       // Re-enable post button
-      if (postButton) {
-        postButton.disabled = false;
-        postButton.textContent = "Post to LinkedIn";
+      if (this.postButton) {
+        this.postButton.disabled = false;
+        this.postButton.textContent = "Post to LinkedIn";
       }
     }
   }

@@ -80,3 +80,8 @@
     font-size: 0.85em;
     opacity: 0.8;
 }
+
+/* LinkedIn Post Composer styling */
+.contentos-post-textarea-container {
+    margin-bottom: 1rem;
+}

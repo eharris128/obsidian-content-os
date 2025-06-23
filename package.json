@@ -1,6 +1,6 @@
 {
 	"name": "content-os",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Post directly to LinkedIn from your vault.",
 	"main": "main.js",
 	"type": "module",
@@ -46,10 +46,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/eharris128/open-your-mind"
+		"url": "https://github.com/eharris128/obsidian-content-os"
 	},
 	"bugs": {
-		"url": "https://github.com/eharris128/open-your-mind/issues"
+		"url": "https://github.com/eharris128/obsidian-content-os/issues"
 	},
-	"homepage": "https://github.com/eharris128/open-your-mind#readme"
+	"homepage": "https://github.com/eharris128/obsidian-content-os#readme"
 }
