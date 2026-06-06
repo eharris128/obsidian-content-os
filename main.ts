@@ -24,7 +24,7 @@ const DEFAULT_SETTINGS: ContentOSSettings = {
 };
 
 export default class ContentOSPlugin extends Plugin {
-  settings!: ContentOSSettings;
+  declare settings: ContentOSSettings;
   logger!: Logger | ReturnType<typeof createLogger>;
 
   override async onload() {
@@ -140,7 +140,7 @@ class ContentOSSettingTab extends PluginSettingTab {
     this.plugin = plugin;
   }
 
-  display(): void {
+  override display(): void {
     const { containerEl } = this;
 
     containerEl.empty();
